@@ -1,0 +1,8 @@
+820a821,823
+> 	if (blk == -1)
+> 		return ret_code;
+> 
+914c917
+< 	if (!blk)
+---
+> 	if (!blk || blk == -1)

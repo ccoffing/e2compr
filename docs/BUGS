@@ -1,0 +1,33 @@
+BUGS as of 19980705
+------------------------------------------------------------------------
+
+truncate doesn't work (EACCES)
+cattr foo -t 1000
+
+can we have race conditions in compress/uncompress?  that would be
+ugly.
+
+
+
+
+
+Haven't seen these yet in 19980705:
+
+i_blocks is sometimes too small; e2fsck catches this.  How does this
+happen?  This is on compressed files (at least?)  (and at least one
+might not have been fully compressed...?  perhaps compression failed
+partway through but ...?)
+
+GETCOMPRRATIO calcs arg[0] right from the bytes, but some [large?]
+files have i->i_blocks too large for the bytes!!  Even without
+e2compr.  strange.
+
+
+
+
+tests for not uncompressing if truncating on a block boundary:
+------------------------------------------------------------------------
+compress file.
+copy uncompressed over it.
+"bad magic number"
+

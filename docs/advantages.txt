@@ -1,0 +1,16 @@
+What's changed in autocompressing ext2 as compared to the original e2compr ?
+
+- less intrusive on the inode's reserved bits
+- transparent -- less headaches for the users; no more chattr.
+- automated -- greater disk savings since nearly everything /may/ be compressed
+- fast[er] -- "caches" recently used files uncompressed via uncompressed
+  writeback
+- handles large files without any extra overhead (used to be, e2compr would
+  have to use an indirect bitmap for large files to determine compression state
+  of clusters.)
+- updated zlib (ver 1.04)
+- updated kernel (2.0.34)
+
+What's coming:
+
+- fast[er] -- fewer memcpys to uncompress data  (RSN!)

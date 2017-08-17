@@ -1,0 +1,49 @@
+TODO
+------------------------------------------------------------------------
+
+allocate [dt]indirect block if we need it to set the cluster flag and
+it doesn't exist.
+
+create regression tests
+
+b) keep track of what was last compressed or decompressed in the
+de/compression buffer, so that at the very least, we can avoid
+multiply decompressing clusters in a single file being sequentially
+accessed.
+
+c) figuring out how to allocate and maintain a de/compression buffer
+pool to solve the problem of b more generally.
+
+compression pulls system way down.  perhaps put calls to schedule()
+in?  Migrator compresses via multiple calls to SETCLUSTERBIT which
+helps but that's still a bit choppy to run as a daemon.
+
+Remove ratios from user's grasp.  Make migrator adaptive.  Start with
+expected compression ratios of 0.5 for everything.  With each
+iteration, it notes the compression ratios achieved previously, and
+adjusts its expected values.
+
+make option to have multiple work areas for multiprocessors
+
+could reduce memcpys in uncompress by repeatedly calling rGZIP on
+bh[x]->b_data instead of memcpying first.  compress:1007
+Better yet, pass an array of bh from uncompress_cluster to uncompress_block
+and uncompress directly there.
+
+document; translate french
+
+EXT2_NOCOMPR_FL is unimplemented it seems.
+
+better fsck patch
+- verify COMPRBLK_FL
+- Illegal block number passed to ext2fs_test_block_bitmap #4294967295 for multiply claimed block map
+
+e2compr should only do writeback uncompression if free space is above n.
+
+make truncate smarter: if truncating @ a cluster boundary, don't
+bother to uncompress
+warning:  naive implementation breaks stuff!
+
+KDE/qt frontend for the migrator
+
+KDE/qt frontend for the migrator.conf
